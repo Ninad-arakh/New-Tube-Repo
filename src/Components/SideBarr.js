@@ -31,7 +31,7 @@ const Sidebarr = () => {
       className={`${
         isSide
           ? "absolute bg-white mt-10  "
-          : "border  mt-14 md:w-[15.6666%] h-[100vh] relative overflow-x-hidden overflow-y-scroll ml-0  "
+          : "border  mt-14 md:w-[15.6666%] h-[100vh] absolute bg-white overflow-x-hidden overflow-y-scroll ml-0  "
       }`}
     >
       <div className=" p-3">
