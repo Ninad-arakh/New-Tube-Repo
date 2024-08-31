@@ -16,19 +16,28 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Sidebarr = () => {
-
-  let select = useSelector((store) => store.app.istoggle);
+  const select = useSelector((store) => store.app.istoggle);
+  let isSide;
   const screenWidth = window.screen.width;
-
-  if(!select){
+  if (screenWidth <= 640) {
+    isSide = true;
+  }
+  if (!select) {
     return null;
   }
-  
+
   return (
-    <div className="border  mt-14 md:w-[15.6666%] h-[100vh] relative overflow-x-hidden overflow-y-scroll ml-0 ">
+    <div
+      className={`${
+        isSide
+          ? "absolute bg-white mt-10  "
+          : "border  mt-14 md:w-[15.6666%] h-[100vh] relative overflow-x-hidden overflow-y-scroll ml-0 "
+      }`}
+    >
       <div className=" p-3">
         <p className="flex  cursor-pointer p-2 font-bold gap-8 bg-gray-100 rounded-lg text-xs">
-          <MdHomeFilled className="text-2xl ml-1 -mt-1" /> <Link to="/"> Home </Link>
+          <MdHomeFilled className="text-2xl ml-1 -mt-1" />{" "}
+          <Link to="/"> Home </Link>
         </p>
         <p className="flex cursor-pointer p-2  gap-8 text-xs hover:bg-gray-200">
           <PiFilmReelThin className="text-2xl ml-1 -mt-1" /> Shorts
@@ -44,7 +53,7 @@ const Sidebarr = () => {
         <p className="flex cursor-pointer p-2 gap-8  rounded-lg text-xs hover:bg-gray-200">
           <GrChannel className="text-2xl ml-1 -mt-1" /> Your Channel
         </p>
-        <p className="flex cursor-pointer p-2 gap-8 text-xs hover:bg-gray-200" >
+        <p className="flex cursor-pointer p-2 gap-8 text-xs hover:bg-gray-200">
           <GoHistory className="text-2xl ml-1 -mt-1" /> History
         </p>
         <p className="flex cursor-pointer p-2 gap-8 text-xs hover:bg-gray-200">

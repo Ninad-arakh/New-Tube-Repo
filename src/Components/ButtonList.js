@@ -30,7 +30,7 @@ const ButtonList = () => {
   };
 
   return (
-    <div className=" mt-[12%] sm:mt-[5%] flex w-full overflow-hidden">
+    <div className=" mt-[12%] sm:mt-[6%] flex w-full overflow-hidden">
       <div className="flex w-full ">
         {butonlist.map((buton, i) => (
           <button

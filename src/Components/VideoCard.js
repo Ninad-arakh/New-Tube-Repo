@@ -31,7 +31,7 @@ export const VideoCard = (props) => {
   // and finally the jsx code for the card to display/render
   return (
     <div
-      className=" border overflow-hidden cursor-pointer flex flex-col mt-2 w-[97%] md:h-[16rem] md:w-[18rem] rounded-2xl hover:bg-gray-200 duration-[0.3s]
+      className=" border overflow-hidden cursor-pointer flex flex-col mt-2 w-[97%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s]
     "
     >
       {/* thumbnail of the video */}
