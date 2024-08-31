@@ -91,7 +91,7 @@ const VideoList = () => {
   // fetching the videos by the categorybutton
   const getVideosByCategory = async () => {
     const data = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${CategoryButn}&type=video&key=${api}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${CategoryButn}&type=video&key=${apiNew}`
     );
     const json = await data.json();
     dispatch(addVideos(json?.items));

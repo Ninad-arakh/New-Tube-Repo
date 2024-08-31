@@ -5,6 +5,7 @@ import { toggle, setCategory } from "../Utiliy/Store/AppSlice";
 import { useState, useEffect } from "react";
 import { YOUTUBE_SUGGESTION_API } from "../Utiliy/Constants";
 import { setSearchSuggestions } from "../Utiliy/Store/AppSlice";
+import SearchSuggestion from "./SearchSuggestionCard";
 
 const Header = () => {
   const [input, setInput] = useState("");
@@ -65,12 +66,11 @@ const Header = () => {
       </div>
 
       {/* Search field and Search button */}
-      <div className="text-center  md:w-5/12 ">
+      <form className="text-center  md:w-5/12 " onSubmit={(e)=> e.preventDefault()}>
         <input
           type="text"
           placeholder="Search"
           onFocus={() => isOpen()}
-          onBlur={() => setOpen(false)}
           className="py-[2px]  border border-gray-400  rounded-l-2xl focus:border-blue-500 w-[73%] md:w-10/12 pl-[4%] md:pl-[2.70rem]"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -88,19 +88,14 @@ const Header = () => {
               <ul>
                 {searchSuggestion.map((item, indx) => (
                   <div key={indx}>
-                    <li className="flex hover:bg-gray-200 cursor-pointer rounded-lg px-4 py-1 my-1">
-                      <span className="text-lg mt-1 mr-2">
-                        <IoIosSearch />
-                      </span>{" "}
-                      {item}
-                    </li>
+                    <SearchSuggestion item={item} open={isOpen}/>
                   </div>
                 ))}
               </ul>
             </div>
           )}
         </div>
-      </div>
+      </form>
 
       {/* Profile */}
       <div>
