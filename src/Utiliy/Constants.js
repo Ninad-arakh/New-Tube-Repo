@@ -12,3 +12,19 @@ export const YOUTUBE_SUGGESTION_API = `http://suggestqueries.google.com/complete
 
 
 export const YOUTUBE_SEARCH_CHANNEL_API = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${keyword}&type=video&key=${apiNew}`;
+
+
+export function formatViews(views) {
+    // Check if views is a number and is finite
+    if (typeof views !== 'number' || !isFinite(views)) {
+        throw new Error('Invalid input: views should be a finite number.');
+    }
+
+    if (views >= 1_000_000) {
+        return (views / 1_000_000).toFixed(1) + 'M'; // e.g., 1.2M for 1,200,000
+    } else if (views >= 1_000) {
+        return (views / 1_000).toFixed(1) + 'K'; // e.g., 1.2K for 1,200
+    } else {
+        return views.toString(); // Less than 1,000, no formatting needed
+    }
+}

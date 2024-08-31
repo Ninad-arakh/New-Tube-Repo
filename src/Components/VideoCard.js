@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { YOUTUBE_VIDEO_API, api } from "../Utiliy/Constants";
+import { YOUTUBE_VIDEO_API, api, apiNew } from "../Utiliy/Constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ export const VideoCard = (props) => {
   const getChImg = async () => {
     try {
       const response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${snippet?.channelId}&key=${api}`
+        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${snippet?.channelId}&key=${apiNew}`
       );
       const ChImage = await response.json();
       setImage(ChImage?.items[0]?.snippet?.thumbnails?.high?.url);
@@ -31,9 +31,7 @@ export const VideoCard = (props) => {
   // and finally the jsx code for the card to display/render
   return (
     <div
-      className=" border overflow-hidden cursor-pointer flex flex-col mt-2 w-[97%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s]
-    "
-    >
+      className=" border overflow-hidden cursor-pointer flex flex-col mt-2 w-[97%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s]">
       {/* thumbnail of the video */}
       <div className="img rounded-2xl">
         {snippet?.thumbnails?.maxres ? (
@@ -100,6 +98,10 @@ const VideoList = () => {
     setVideos(json?.items);
   };
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+  };
+
   if (videos.length === 0) return <Shimmer />;
 
   return (
@@ -111,6 +113,7 @@ const VideoList = () => {
               typeof video.id === "object" ? video.id.videoId : video.id
             }`}
             key={i}
+            onClick={handleScrollToTop}
           >
             <VideoCard props={video} />
           </Link>

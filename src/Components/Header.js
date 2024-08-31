@@ -11,6 +11,11 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const { searchSuggestion } = useSelector((store) => store.app);
+  const screenWidth = window.screen.width;
+  let isSide;
+  if (screenWidth <= 640) {
+    isSide = true;
+  }
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -43,9 +48,9 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center w-screen mx-0  p-[1%] fixed z-10 bg-white md:mx-[1%] md:p-[1%]">
+    <div className="flex justify-between items-center w-[100%] mx-0 pt-2 p-[1%] fixed z-10 bg-white md:mx-[1%] md:p-[1%]">
       {/* hamburger icon and youtube icon */}
-      <div className="flex ">
+      <div className="flex ml-2">
         <img
           className="h-5 md:h-6 my-1 cursor-pointer font-thin rounded-lg hover:bg-gray-200"
           alt="button"
@@ -79,7 +84,7 @@ const Header = () => {
         {/* a div for the search suggestions */}
         <div>
           {open && searchSuggestion.length !== 0 && (
-            <div className="absolute border border-black rounded-lg w-[29rem]  ml-4 text-left bg-white">
+            <div className="absolute border border-black rounded-lg ml-1 sm:w-[29rem]  sm:ml-4 text-left bg-white">
               <ul>
                 {searchSuggestion.map((item, indx) => (
                   <div key={indx}>
@@ -102,7 +107,7 @@ const Header = () => {
         <img
           alt="user"
           src="https://tse3.mm.bing.net/th?id=OIP.XV6-vNO2lVeC7xxnM1XjngHaFk&pid=Api&P=0&h=220"
-          className="rounded-full w-8 h-8 mx-5"
+          className="rounded-full w-8 h-8 mx-5 cursor-pointer"
         />
       </div>
     </div>
