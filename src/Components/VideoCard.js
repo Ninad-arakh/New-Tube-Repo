@@ -10,7 +10,6 @@ export const VideoCard = (props) => {
   const { snippet, statistics } = props?.props;
   const [ChImagee, setImage] = useState("");
 
-
   // fetching the image of the channel
   const getChImg = async () => {
     try {
@@ -32,7 +31,7 @@ export const VideoCard = (props) => {
   // and finally the jsx code for the card to display/render
   return (
     <div
-      className=" border overflow-hidden cursor-pointer flex flex-col mt-2 h-[16rem] w-[18rem] rounded-2xl hover:bg-gray-200 duration-[0.3s]
+      className=" border overflow-hidden cursor-pointer flex flex-col mt-2 w-[97%] md:h-[16rem] md:w-[18rem] rounded-2xl hover:bg-gray-200 duration-[0.3s]
     "
     >
       {/* thumbnail of the video */}
@@ -41,13 +40,13 @@ export const VideoCard = (props) => {
           <img
             alt="thumbnail"
             src={snippet?.thumbnails?.maxres?.url}
-            className="w-[18rem] rounded-2xl p-1 "
+            className="md:w-[18rem] rounded-2xl p-1 "
           />
         ) : (
           <img
             alt="thumbnail"
             src={snippet?.thumbnails?.medium?.url}
-            className="w-[18rem] rounded-2xl p-1 "
+            className="md:w-[18rem] rounded-2xl p-1 "
           />
         )}
       </div>
@@ -104,7 +103,7 @@ const VideoList = () => {
   if (videos.length === 0) return <Shimmer />;
 
   return (
-    <div className="my-2 mx-4 flex flex-wrap w-[98.50%] ">
+    <div className="my-2 mx-4 flex flex-wrap  ">
       {videos.map((video, i) => {
         return (
           <Link

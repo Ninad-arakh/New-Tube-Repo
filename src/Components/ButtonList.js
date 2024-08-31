@@ -30,15 +30,15 @@ const ButtonList = () => {
   };
 
   return (
-    <div className=" mt-14 flex w-full overflow-hidden">
+    <div className=" mt-[12%] sm:mt-[5%] flex w-full overflow-hidden">
       <div className="flex w-full ">
         {butonlist.map((buton, i) => (
           <button
             key={i}
             className={`${
               active === buton
-                ? "bg-slate-900 text-white ml-2 h-7 border border-gray-400 rounded-lg px-2  duration-200"
-                : "ml-2 h-7 border border-gray-400 rounded-lg px-2 hover:bg-gray-100 duration-200"
+                ? "bg-slate-900 text-white ml-[1%] h-[100%] border border-gray-400 rounded-lg px-2  duration-200"
+                : "ml-2 h-[100%] border border-gray-400 rounded-lg px-2 hover:bg-gray-100 duration-200"
             }x`}
             onClick={() => videobyTag(buton)}
           >
