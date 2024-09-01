@@ -1,14 +1,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react"
+import { useEffect } from "react";
 import { generateRName, generateRandText } from "../Utiliy/helper";
-import { setMessage } from "../Utiliy/Store/ChatSlice"
+import { setMessage } from "../Utiliy/Store/ChatSlice";
 
 //showing messages
 const Message = ({ name, message }) => {
-  
+  const isDark = useSelector((store) => store.app.isDark);
+
   return (
-    <div className="flex w-full mt-2 bg-gray-100 rounded-lg">
+    <div
+      className={`${
+        isDark
+          ? `flex w-full mt-2 bg-gray-100 rounded-lg`
+          : `flex w-full mt-2 bg-gray-800 rounded-lg`
+      }`}
+    >
       {/* avatar image */}
       <div className="">
         <img
@@ -32,8 +39,10 @@ const ShowChatMessages = () => {
   const messageObj = useSelector((store) => store.chat.message);
   useEffect(() => {
     const i = setInterval(() => {
-      dispatch(setMessage({name:generateRName(), message: generateRandText(20)}))
-    },500);
+      dispatch(
+        setMessage({ name: generateRName(), message: generateRandText(20) })
+      );
+    }, 500);
 
     return () => {
       clearInterval(i);
@@ -44,8 +53,8 @@ const ShowChatMessages = () => {
     return (
       <div className="flex flex-col-reverse ">
         {messageObj.map((message, ind) => [
-            <Message key={ind} name={message.name} message={message.message} />,
-          ])}
+          <Message key={ind} name={message.name} message={message.message} />,
+        ])}
         <Message />
       </div>
     );

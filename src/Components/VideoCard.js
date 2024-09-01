@@ -4,11 +4,13 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addVideos } from "../Utiliy/Store/AppSlice";
+import { formatViews } from "../Utiliy/Constants"
 
 // rendering each video card by getting prop
 export const VideoCard = (props) => {
   const { snippet, statistics } = props?.props;
   const [ChImagee, setImage] = useState("");
+  const isDark = useSelector((store) => store.app.isDark);
 
   // fetching the image of the channel
   const getChImg = async () => {
@@ -23,15 +25,35 @@ export const VideoCard = (props) => {
     }
   };
 
+  let isSide;
+  const screenWidth = window.screen.width;
+  if (screenWidth <= 640) {
+    isSide = true;
+  }
+
   // this hook for doing the asynchronous tasks
   useEffect(() => {
     getChImg();
   });
+  let viewsCount = Number(statistics?.viewCount);
 
   // and finally the jsx code for the card to display/render
   return (
     <div
-      className=" border overflow-hidden cursor-pointer flex flex-col mt-2 w-[97%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s]">
+      className={` ${
+        isDark
+          ? ` ${
+              isSide
+                ? `border overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s] ml-1`
+                : `border overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s] ml-1`
+            }  `
+          : `${
+              isSide
+                ? `border  overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-800 duration-[0.3s] ml-1`
+                : ` overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-800 duration-[0.3s] ml-1`
+            }  `
+      }`}
+    >
       {/* thumbnail of the video */}
       <div className="img rounded-2xl">
         {snippet?.thumbnails?.maxres ? (
@@ -61,7 +83,7 @@ export const VideoCard = (props) => {
         <div className=" mb-1 mr-1">
           <p className="text-sm font-bold ">{snippet?.title}</p>
           <p className="text-sm">{snippet?.channelTitle}</p>
-          <p className="">{statistics?.viewCount} Views</p>
+          <p className="">{formatViews(viewsCount)} Views</p>
         </div>
       </div>
     </div>
@@ -99,13 +121,13 @@ const VideoList = () => {
   };
 
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
   };
 
   if (videos.length === 0) return <Shimmer />;
 
   return (
-    <div className="my-2 mx-4 flex flex-wrap  ">
+    <div className="my-2 mx-2 flex flex-wrap w-[99%] ">
       {videos.map((video, i) => {
         return (
           <Link

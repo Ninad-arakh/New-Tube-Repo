@@ -7,6 +7,7 @@ const AppSlice = createSlice({
     videos: [],
     category: "All",
     searchSuggestion: [],
+    isDark : true,
   },
   reducers: {
     toggle: (state) => {
@@ -24,9 +25,12 @@ const AppSlice = createSlice({
     setSearchSuggestions: (state, action) => {
       state.searchSuggestion = action.payload;
     },
+    setDarkMode: (state) => {
+      state.isDark = !state.isDark;
+    }
   },
 });
 
-export const { toggle, disable, addVideos, setCategory, setSearchSuggestions } =
+export const { toggle, disable, addVideos, setCategory, setSearchSuggestions, setDarkMode } =
   AppSlice.actions;
 export default AppSlice.reducer;

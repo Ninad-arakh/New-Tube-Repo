@@ -24,6 +24,7 @@ const appRouter = createBrowserRouter([
 ]);
 
 function App() {
+  
   return (
     <Provider store={Store}>
       <div className="  w-full">

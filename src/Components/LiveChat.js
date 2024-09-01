@@ -1,12 +1,13 @@
 import { useState } from "react";
 import React from "react";
 import ShowChatMessages from "./ShowChatMessages";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMessage } from "../Utiliy/Store/ChatSlice";
 
 const LiveChat = () => {
   const [ipMessage, setipMessage] = useState("");
   const dispatch = useDispatch();
+  const isDark = useSelector((store) => store.app.isDark);
 
   const sendMessage = () => {
     dispatch(setMessage({ name: "gohan", message: ipMessage }));
@@ -45,7 +46,7 @@ const LiveChat = () => {
           <input
             type="text"
             placeholder="Comment"
-            className="my-1 mx-0 w-56 px-2 "
+            className={`${isDark? "my-1 mx-0 w-56 px-2 rounded-lg" : "my-1 mx-0 w-56 px-2 bg-gray-800 rounded-lg"}`}
             onChange={(e) => {
               setipMessage(e.target.value);
             }}
