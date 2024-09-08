@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.ac491b84.css",
-    "main.js": "/static/js/main.4a2a4a8e.js",
-    "index.html": "/index.html",
-    "main.ac491b84.css.map": "/static/css/main.ac491b84.css.map",
-    "main.4a2a4a8e.js.map": "/static/js/main.4a2a4a8e.js.map"
+    "main.css": "/New-Tube-Repo/static/css/main.15db4a36.css",
+    "main.js": "/New-Tube-Repo/static/js/main.d6648e48.js",
+    "index.html": "/New-Tube-Repo/index.html",
+    "main.15db4a36.css.map": "/New-Tube-Repo/static/css/main.15db4a36.css.map",
+    "main.d6648e48.js.map": "/New-Tube-Repo/static/js/main.d6648e48.js.map"
   },
   "entrypoints": [
-    "static/css/main.ac491b84.css",
-    "static/js/main.4a2a4a8e.js"
+    "static/css/main.15db4a36.css",
+    "static/js/main.d6648e48.js"
   ]
 }
