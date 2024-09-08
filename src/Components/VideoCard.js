@@ -83,7 +83,7 @@ export const VideoCard = (props) => {
         <div className=" mb-1 mr-1">
           <p className="text-sm font-bold ">{snippet?.title}</p>
           <p className="text-sm">{snippet?.channelTitle}</p>
-          <p className="">{formatViews(viewsCount)} Views</p>
+          <p className="">{viewsCount && formatViews(viewsCount)} Views</p>
         </div>
       </div>
     </div>
