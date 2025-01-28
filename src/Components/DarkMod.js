@@ -14,7 +14,7 @@ const DarkMod = () => {
         className={`${
           isDark
             ? "text-slate-200 bg-slate-800 px-2 rounded-xl mt-1 w-12"
-            : "bg-slate-200 text-slate-800 px-2 rounded-xl mt-1 w-12"
+            : "text-slate-800 bg-slate-200 px-2 rounded-xl mt-1 w-12"
         } `}
         onClick={darkHandler}
       >

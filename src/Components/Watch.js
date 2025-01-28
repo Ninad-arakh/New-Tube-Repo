@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { disable } from "../Utiliy/Store/AppSlice";
 import { useSearchParams } from "react-router-dom";
-import { api, apiNew, formatViews } from "../Utiliy/Constants";
+import {  formatViews } from "../Utiliy/Constants";
 import LiveChat from "./LiveChat";
 
 const Watch = () => {
@@ -22,7 +22,7 @@ const Watch = () => {
 
   const getSingleVideo = async () => {
     const res = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${apiNew}`
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${process.env.REACT_APP_API_NEW}`
     );
     const json = await res.json();
     setVideo(json?.items[0]);
@@ -38,7 +38,7 @@ const Watch = () => {
   const getChImg = async () => {
     try {
       const response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${singleVideo?.snippet?.channelId}&key=${apiNew}`
+        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${singleVideo?.snippet?.channelId}&key=${process.env.REACT_APP_API_NEW}`
       );
       const ChImage = await response.json();
       // console.log("chimage ", ChImage);

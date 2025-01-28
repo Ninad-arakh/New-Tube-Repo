@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { YOUTUBE_VIDEO_API, api, apiNew } from "../Utiliy/Constants";
+import { YOUTUBE_VIDEO_API } from "../Utiliy/Constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,7 @@ export const VideoCard = (props) => {
   const getChImg = async () => {
     try {
       const response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${snippet?.channelId}&key=${apiNew}`
+        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${snippet?.channelId}&key=${process.env.REACT_APP_API_NEW}`
       );
       const ChImage = await response.json();
       setImage(ChImage?.items[0]?.snippet?.thumbnails?.high?.url);
@@ -113,7 +113,7 @@ const VideoList = () => {
   // fetching the videos by the categorybutton
   const getVideosByCategory = async () => {
     const data = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${CategoryButn}&type=video&key=${apiNew}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${CategoryButn}&type=video&key=${process.env.REACT_APP_API_NEW}`
     );
     const json = await data.json();
     dispatch(addVideos(json?.items));
