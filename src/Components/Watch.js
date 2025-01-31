@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { disable } from "../Utiliy/Store/AppSlice";
 import { useSearchParams } from "react-router-dom";
-import {  formatViews } from "../Utiliy/Constants";
+import { formatViews, URL } from "../Utiliy/Constants";
 import LiveChat from "./LiveChat";
+import axios from "axios";
 
 const Watch = () => {
   const dispach = useDispatch();
   const [singleVideo, setVideo] = useState([]);
+  const [singleVId, setSingleVId] = useState("");
   const [viewsCount, setViewsCount] = useState(null);
   const [disc, setDisc] = useState(false);
   const [vID] = useSearchParams();
@@ -21,13 +23,12 @@ const Watch = () => {
   }
 
   const getSingleVideo = async () => {
-    const res = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${process.env.REACT_APP_API_NEW}`
-    );
-    const json = await res.json();
-    setVideo(json?.items[0]);
-    const value = Number(json?.items[0]?.statistics?.viewCount);
+    const json = await axios.get(`${URL}video?id=${videoId}`);
+    setSingleVId(json?.data?.data?.items[0]?.snippet?.channelId);
+    setVideo(json?.data?.data?.items[0]);
+    const value = Number(json?.data?.data?.items[0]?.statistics?.viewCount);
     setViewsCount(formatViews(value));
+    getChImg();
   };
 
   const handleDiscription = () => {
@@ -36,38 +37,34 @@ const Watch = () => {
 
   // getting channel image url
   const getChImg = async () => {
-    try {
-      const response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${singleVideo?.snippet?.channelId}&key=${process.env.REACT_APP_API_NEW}`
-      );
-      const ChImage = await response.json();
-      // console.log("chimage ", ChImage);
-      setImage(ChImage?.items[0]?.snippet?.thumbnails?.high?.url);
-    } catch (error) {
-      console.log(error);
+    if (singleVId) {
+      try {
+        const ChImage = await axios.get(`${URL}chImage?id=${singleVId}`);
+        setImage(ChImage?.data?.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
-  const formatViews = (views)=> {
+  const formatViews = (views) => {
     // Check if views is a number and is finite
-    if (typeof views !== 'number' || !isFinite(views)) {
-        throw new Error('Invalid input: views should be a finite number.');
+    if (typeof views !== "number" || !isFinite(views)) {
+      throw new Error("Invalid input: views should be a finite number.");
     }
 
     if (views >= 1_000_000) {
-        return (views / 1_000_000).toFixed(1) + 'M'; // e.g., 1.2M for 1,200,000
+      return (views / 1_000_000).toFixed(1) + "M"; // e.g., 1.2M for 1,200,000
     } else if (views >= 1_000) {
-        return (views / 1_000).toFixed(1) + 'K'; // e.g., 1.2K for 1,200
+      return (views / 1_000).toFixed(1) + "K"; // e.g., 1.2K for 1,200
     } else {
-        return views.toString(); // Less than 1,000, no formatting needed
+      return views.toString(); // Less than 1,000, no formatting needed
     }
-}
+  };
 
   useEffect(() => {
     dispach(disable());
     getSingleVideo();
-    getChImg();
-    
   }, []);
   // console.log("views count: ", viewsCount);
 

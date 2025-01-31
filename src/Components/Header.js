@@ -3,12 +3,13 @@ import { IoIosSearch } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle, setCategory } from "../Utiliy/Store/AppSlice";
 import { useState, useEffect } from "react";
-import { YOUTUBE_SUGGESTION_API } from "../Utiliy/Constants";
+import { URL, YOUTUBE_SUGGESTION_API } from "../Utiliy/Constants";
 import { setSearchSuggestions } from "../Utiliy/Store/AppSlice";
 import SearchSuggestion from "./SearchSuggestionCard";
 import DarkMod from "./DarkMod";
 import { IoMdClose } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
+import axios from "axios";
 
 const Header = () => {
   const [input, setInput] = useState("");
@@ -43,9 +44,9 @@ const Header = () => {
   };
 
   const showSuggestions = async () => {
-    const data = await fetch(YOUTUBE_SUGGESTION_API + input);
-    const json = await data.json();
-    dispatch(setSearchSuggestions(json[1]));
+    const json = await axios.get(`${URL}suggestion?q=${input}`);
+    const data = json.data.data;
+    dispatch(setSearchSuggestions(data[1]));
     // console.log("json" , json);
   };
 
@@ -84,7 +85,7 @@ const Header = () => {
           </div>
         )}
         <img
-          className="h-6 ml-2 md:h-8 md:ml-5 mt-[2px] md:mt-0"
+          className="h-6 ml-2 md:h-8 md:ml-5 mt-[2px] md:mt-0 rounded-md"
           alt="logo"
           src="https://seeklogo.com/images/V/vanced-logo-ABBC416B5F-seeklogo.com.png"
         />

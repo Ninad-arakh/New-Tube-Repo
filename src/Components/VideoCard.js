@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { YOUTUBE_VIDEO_API } from "../Utiliy/Constants";
+import { URL, YOUTUBE_VIDEO_API } from "../Utiliy/Constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addVideos } from "../Utiliy/Store/AppSlice";
 import { formatViews } from "../Utiliy/Constants"
+import axios from "axios";
 
 // rendering each video card by getting prop
 export const VideoCard = (props) => {
@@ -13,13 +14,10 @@ export const VideoCard = (props) => {
   const isDark = useSelector((store) => store.app.isDark);
 
   // fetching the image of the channel
-  const getChImg = async () => {
+  const getChImg = async () => { 
     try {
-      const response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${snippet?.channelId}&key=${process.env.REACT_APP_API_NEW}`
-      );
-      const ChImage = await response.json();
-      setImage(ChImage?.items[0]?.snippet?.thumbnails?.high?.url);
+      const ChImage = await axios.get(`${URL}chImage?id=${snippet?.channelId}`);
+      setImage(ChImage?.data?.data);
     } catch (error) {
       console.log(error);
     }
@@ -105,19 +103,17 @@ const VideoList = () => {
   }, [CategoryButn]);
 
   const fetchVideo = async () => {
-    const data = await fetch(YOUTUBE_VIDEO_API);
-    const json = await data.json();
-    setVideos(json.items);
+    const data = await axios.get(URL+"home");
+    const json = await data?.data?.data;
+    setVideos(json?.items);
   };
 
   // fetching the videos by the categorybutton
   const getVideosByCategory = async () => {
-    const data = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${CategoryButn}&type=video&key=${process.env.REACT_APP_API_NEW}`
-    );
-    const json = await data.json();
-    dispatch(addVideos(json?.items));
-    setVideos(json?.items);
+    const json = await axios.get(`${URL}category?q=${CategoryButn}`);
+    console.log("categoryBtn : ", json)
+    dispatch(addVideos(json?.data?.data?.items));
+    setVideos(json?.data?.data?.items);
   };
 
   const handleScrollToTop = () => {
