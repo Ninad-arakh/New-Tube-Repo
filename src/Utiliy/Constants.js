@@ -3,7 +3,10 @@ const keyword = "deathNote";
 
 export const live_chatCount = 150;
 
-export const URL = "http://13.232.176.13:8888/"
+// for local server
+export const URL = "http://localhost:8888/"
+// for production
+// export const URL = "http://13.232.176.13:8888/"
 
 export const YOUTUBE_VIDEO_API = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=${code}&key=${process.env.REACT_APP_API_NEW}`;
 
