@@ -13,11 +13,12 @@ import { IoMusicalNotesOutline } from "react-icons/io5";
 import { RiMovieLine } from "react-icons/ri";
 import { MdOutlineWifiTethering } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const Sidebarr = () => {
   const select = useSelector((store) => store.app.istoggle);
   const isDark = useSelector((store) => store.app.isDark);
+  const params = useSearchParams()
   let isSide;
   const screenWidth = window.screen.width;
   if (screenWidth <= 640) {
@@ -33,13 +34,13 @@ const Sidebarr = () => {
         isDark
           ? `${
               isSide
-                ? `absolute bg-white mt-12 h-full overflow-x-scroll `
-                : `border  mt-14 md:w-[15.6666%] h-[100vh] relative  overflow-x-hidden overflow-y-scroll ml-0  `
+                ? `fixed bg-white mt-12 h-full overflow-x-scroll `
+                : `border ${params[0]?.size > 0 ? "fixed":"relative"}  mt-14 md:w-[15.6666%] h-[100vh] z-50 overflow-x-hidden overflow-y-scroll ml-0 bg-white `
             }`
           : `${
               isSide
-                ? `absolute bg-black mt-12 h-full overflow-x-scroll `
-                : `border border-gray-600 rounded-xl  mt-16 md:w-[15.6666%] h-[100vh] relative bg-black text-white overflow-x-hidden overflow-y-scroll -ml-1 no-scrollbar `
+                ? `fixed bg-black mt-12 h-full overflow-x-scroll `
+                : `border ${params[0]?.size > 0 ? "fixed":"relative"} border-gray-600 rounded-xl z-50  mt-16 md:w-[15.6666%] h-[100vh]  bg-black text-white overflow-x-hidden overflow-y-scroll -ml-1 no-scrollbar `
             }`
       } `}
     >
@@ -236,7 +237,7 @@ const Sidebarr = () => {
               : "flex cursor-pointer p-2 gap-8 text-xs hover:bg-gray-800"
           }`}
         >
-          <BsClockHistory className="text-2xl ml-1 -mt-1" /> Wathc Later
+          <BsClockHistory className="text-2xl ml-1 -mt-1" /> Watch Later
         </p>
         <div className="border border-gray-200 w-full"></div>
       </div>

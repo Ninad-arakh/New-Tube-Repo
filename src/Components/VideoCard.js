@@ -42,13 +42,13 @@ export const VideoCard = (props) => {
         isDark
           ? ` ${
               isSide
-                ? `border overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s] ml-1`
-                : `border overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s] ml-1`
+                ? `border overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s] ml-1 gap-1 mx-1`
+                : `border overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-200 duration-[0.3s] ml-1 gap-1 mx-1`
             }  `
           : `${
               isSide
-                ? `border  overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-800 duration-[0.3s] ml-1`
-                : ` overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-800 duration-[0.3s] ml-1`
+                ? `border  overflow-hidden cursor-pointer flex flex-col mt-2 w-[96 mx-1%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-800 duration-[0.3s] ml-1 gap-1`
+                : ` overflow-hidden cursor-pointer flex flex-col mt-2 w-[96%] md:h-[16rem] md:w-[17rem] rounded-2xl hover:bg-gray-800 duration-[0.3s] ml-1 gap-1 mx-1`
             }  `
       }`}
     >
@@ -80,8 +80,8 @@ export const VideoCard = (props) => {
         </div>
         <div className=" mb-1 mr-1">
           <p className="text-sm font-bold ">{snippet?.title}</p>
-          <p className="text-sm">{snippet?.channelTitle}</p>
-          <p className="">{viewsCount && formatViews(viewsCount)} Views</p>
+          <p className="text-xs">{snippet?.channelTitle}</p>
+          <p className="text-xs">{viewsCount && formatViews(viewsCount)} Views</p>
         </div>
       </div>
     </div>

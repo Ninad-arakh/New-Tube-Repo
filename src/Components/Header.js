@@ -58,8 +58,8 @@ const Header = () => {
     <div
       className={`${
         isDark
-          ? "flex justify-between items-center w-[100%] mx-0 pt-2 p-[1%] fixed z-10   md:mx-[1%] md:p-[1%] bg-white"
-          : "flex justify-between items-center w-[100%] mx-0 pt-2 p-[1%] fixed z-10 bg-black text-white md:mx-[1%] md:p-[1%] "
+          ? "flex justify-between items-center w-[100vw] top-0 left-0 mx-0 pt-2 p-[1%] fixed z-10   md:mx-[1 md:p-[1%] bg-white"
+          : "flex justify-between items-center w-[100vw] top-0 left-0 mx-0 pt-2 p-[1%] fixed z-10 bg-black text-white md:mx-[1 md:p-[1%] "
       }`}
     >
       {/* hamburger icon and youtube icon */}
@@ -67,8 +67,8 @@ const Header = () => {
         {!toggleMenu ? (
           <div className={`${
               !isDark
-                ? `h-5 md:h-6 my-1 cursor-pointer text-2xl rounded-lg text-white`
-                : `h-5 md:h-6 my-1 cursor-pointer text-2xl rounded-lg hover:bg-gray-200`
+                ? `h-8 md:h-6 my-1 cursor-pointer text-2xl rounded-lg text-white`
+                : `h-8 md:h-6 my-1 cursor-pointer text-2xl rounded-lg hover:bg-gray-200`
             }`} 
           >
             <IoMenu onClick={() => toggleHandler()}/>
@@ -85,7 +85,7 @@ const Header = () => {
           </div>
         )}
         <img
-          className="h-6 ml-2 md:h-8 md:ml-5 mt-[2px] md:mt-0 rounded-md"
+          className="h-8 mx-1 md:h-8 md:ml-5 mt-[1px] md:mt-0 rounded-md"
           alt="logo"
           src="https://seeklogo.com/images/V/vanced-logo-ABBC416B5F-seeklogo.com.png"
         />
@@ -96,6 +96,7 @@ const Header = () => {
         className="text-center  md:w-5/12 "
         onSubmit={(e) => e.preventDefault()}
       >
+        <div className="flex justify-center items-center">
         <input
           type="text"
           placeholder="Search"
@@ -111,13 +112,14 @@ const Header = () => {
         <button
           className={`${
             isDark
-              ? "border border-gray-400 rounded-r-2xl px-3 md:px-2 pt-[3.6px] pb-[7.1px] w-10 md:w-16 md:pl-5 hover:bg-gray-200 "
-              : "border border-gray-400 rounded-r-2xl px-3 md:px-2 pt-[3.6px] pb-[7.1px] w-10 md:w-16 md:pl-5 hover:bg-gray-800 "
+              ? "border border-gray-400 rounded-r-2xl px-3 md:px-2 pt-[3.6px] pb-[7.1px] w-10 md:w-16 md:pl-5 hover:bg-gray-200 hover:scale-105 duration-200"
+              : "border border-gray-400 rounded-r-2xl px-3 md:px-2 pt-[3.6px] pb-[7.1px] w-10 md:w-16 md:pl-5 hover:bg-gray-600 hover:scale-105 duration-200"
           }`}
           onClick={() => SearchCallHandler()}
         >
           <IoIosSearch />
         </button>
+        </div>
         {/* a div for the search suggestions */}
         <div>
           {open && searchSuggestion.length !== 0 && (
