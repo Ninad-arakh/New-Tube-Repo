@@ -4,7 +4,7 @@ const keyword = "deathNote";
 export const live_chatCount = 150;
 
 // for local server
-export const URL = "http://localhost:8888/"
+export const URL = "https://reacttube.onrender.com/"
 // for production
 // export const URL = "http://13.232.176.13:8888/"
 

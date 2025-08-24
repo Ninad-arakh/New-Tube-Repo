@@ -33,13 +33,13 @@ const Sidebarr = () => {
         isDark
           ? `${
               isSide
-                ? `absolute bg-white mt-10 h-full overflow-x-scroll `
+                ? `absolute bg-white mt-12 h-full overflow-x-scroll `
                 : `border  mt-14 md:w-[15.6666%] h-[100vh] relative  overflow-x-hidden overflow-y-scroll ml-0  `
             }`
           : `${
               isSide
-                ? `absolute bg-black mt-10 h-full overflow-x-scroll `
-                : `border  mt-14 md:w-[15.6666%] h-[100vh] relative bg-black text-white overflow-x-hidden overflow-y-scroll -ml-1 no-scrollbar `
+                ? `absolute bg-black mt-12 h-full overflow-x-scroll `
+                : `border border-gray-600 rounded-xl  mt-16 md:w-[15.6666%] h-[100vh] relative bg-black text-white overflow-x-hidden overflow-y-scroll -ml-1 no-scrollbar `
             }`
       } `}
     >

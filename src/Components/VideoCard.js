@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { URL, YOUTUBE_VIDEO_API } from "../Utiliy/Constants";
+import { URL} from "../Utiliy/Constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -73,9 +73,9 @@ export const VideoCard = (props) => {
       <div className="flex overflow-hidden">
         <div className=" m-1 overflow-hidden">
           {ChImagee !== "" ? (
-            <img alt="im" src={ChImagee} className="rounded-full w-10 h-10" />
+            <img alt="im" src={ChImagee} className="rounded-full w-10 h-10 object-cover " />
           ) : (
-            <img className="rounded-full w-10 h-10" />
+            <img className="rounded-full w-10 h-10 object-cover " />
           )}
         </div>
         <div className=" mb-1 mr-1">
